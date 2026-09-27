@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qizi Xuyên Anime - Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="confetti"></canvas>
+
+    <div class="container">
+        <!-- Man hinh bat dau -->
+        <div id="startScreen" class="screen active">
+            <img src="images/rocket.svg" class="logo" alt="Logo">
+            <h1><span class="red">Qizi</span> <span class="blue">Xuyên Anime</span></h1>
+            <p class="desc">Thử thách Triển khai & Quản trị Hệ thống cực căng!</p>
+            <button class="btn" onclick="startQuiz()">Chiến Ngay! <img src="images/fire.svg" class="btn-icon" alt="Fire"></button>
+        </div>
+
+        <!-- Man hinh cau hoi -->
+        <div id="quizScreen" class="screen">
+            <div class="progress-box">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <h2 class="question" id="questionText"></h2>
+            <div class="options" id="optionsBox"></div>
+        </div>
+
+        <!-- Man hinh ket qua -->
+        <div id="resultScreen" class="screen">
+            <img src="images/trophy.svg" class="logo" alt="Cúp vô địch">
+            <h1 class="blue">Hoàn Thành!</h1>
+            <div class="score-box" id="scoreText">0/6</div>
+            <p class="desc" id="feedbackText"></p>
+            <button class="btn" onclick="restart()">Chơi Lại <img src="images/refresh.svg" class="btn-icon" alt="Refresh"></button>
+        </div>
+    </div>
+
+    <!-- Thu vien confetti tao hieu ung phao hoa -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

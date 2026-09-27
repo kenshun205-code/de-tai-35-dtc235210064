@@ -1,0 +1,207 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    background: linear-gradient(-45deg, #ff4b4b, #9b51e0, #3b82f6, #ff4b4b);
+    background-size: 400% 400%;
+    animation: bgMove 10s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 580px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 28px;
+    padding: 35px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: popIn 0.5s ease-out;
+    position: relative;
+}
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+.logo {
+    width: 65px;
+    height: 65px;
+    margin-bottom: 10px;
+    animation: float 3s ease-in-out infinite;
+    display: inline-block;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.red { color: #ff4b4b; }
+.blue { color: #3b82f6; }
+
+.desc {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(90deg, #ff4b4b, #3b82f6);
+    border: none;
+    color: #fff;
+    padding: 14px 36px;
+    font-size: 1.3rem;
+    font-weight: 900;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.5px;
+}
+
+.btn-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+.progress-box {
+    width: 100%;
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff4b4b, #3b82f6);
+    transition: width 0.3s ease;
+}
+
+.question {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 22px;
+    line-height: 1.45;
+}
+
+.options {
+    display: grid;
+    gap: 12px;
+}
+
+.option {
+    background: #f3f4f6;
+    border: 2px solid transparent;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.option:hover {
+    background: #e5e7eb;
+    transform: scale(1.01);
+}
+
+.option.correct {
+    background: #d1fae5;
+    border-color: #10b981;
+    color: #065f46;
+}
+
+.option.wrong {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #991b1b;
+    animation: shake 0.3s;
+}
+
+.score-box {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: conic-gradient(#3b82f6 0%, #ff4b4b 100%);
+    margin: 0 auto 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 2.8rem;
+    font-weight: 900;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    animation: spin 0.8s ease-out;
+}
+
+#confetti {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes bgMove {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes popIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes spin {
+    from { transform: scale(0) rotate(-180deg); }
+    to { transform: scale(1) rotate(0); }
+}
+
+@keyframes shake {
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}

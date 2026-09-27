@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="refreshGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+  </defs>
+
+  <g fill="url(#refreshGrad)">
+    <!-- Cung tron phia tren & mui ten phai -->
+    <path d="M50 14 C67 14 81 26 85 43 L74 45 C71 33 61 24 50 24 C38 24 28 32 25 43 L34 43 L20 60 L6 43 L15 43 C18 27 33 14 50 14 Z"/>
+    
+    <!-- Cung tron phia duoi & mui ten trai -->
+    <path d="M50 86 C33 86 19 74 15 57 L26 55 C29 67 39 76 50 76 C62 76 72 68 75 57 L66 57 L80 40 L94 57 L85 57 C82 73 67 86 50 86 Z"/>
+  </g>
+</svg>

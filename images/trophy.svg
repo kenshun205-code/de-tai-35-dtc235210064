@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <!-- Gradient vang anh kim -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="35%" stop-color="#f59e0b"/>
+      <stop offset="70%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <!-- Gradient de cup -->
+    <linearGradient id="baseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Quai cup trai va phai -->
+  <path d="M30 25 C14 25 14 52 30 52" fill="none" stroke="url(#goldGrad)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M70 25 C86 25 86 52 70 52" fill="none" stroke="url(#goldGrad)" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Than cup -->
+  <path d="M28 20 L72 20 C72 45 62 60 50 60 C38 60 28 45 28 20 Z" fill="url(#goldGrad)"/>
+
+  <!-- Vanh mieng cup -->
+  <ellipse cx="50" cy="20" rx="22" ry="4" fill="#fde047"/>
+
+  <!-- Co va Chan cup -->
+  <path d="M46 60 L45 74 L55 74 L54 60 Z" fill="url(#goldGrad)"/>
+  <rect x="36" y="74" width="28" height="6" rx="2" fill="url(#goldGrad)"/>
+
+  <!-- De cup bang go/kim loai toi -->
+  <rect x="32" y="80" width="36" height="12" rx="3" fill="url(#baseGrad)"/>
+  <!-- Nhan tren de cup -->
+  <rect x="40" y="83" width="20" height="6" rx="1.5" fill="#fef08a" opacity="0.9"/>
+
+  <!-- Ngoi sao trang tri tren mat cup -->
+  <polygon points="50,32 52.5,39 60,39 54,43 56,50 50,46 44,50 46,43 40,39 47.5,39" fill="#ffffff" opacity="0.95"/>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <!-- Gradient than ten lua -->
+    <linearGradient id="rocketBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <!-- Gradient mui va canh -->
+    <linearGradient id="rocketAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4b4b"/>
+      <stop offset="100%" stop-color="#e11d48"/>
+    </linearGradient>
+    <!-- Gradient kinh tau -->
+    <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <!-- Gradient ngon lua -->
+    <linearGradient id="flameGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="60%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="rotate(45 50 50)">
+    <!-- Ngon lua phut ra -->
+    <path d="M42 70 Q50 98 50 98 Q50 98 58 70 Z" fill="url(#flameGrad)"/>
+    <path d="M45 70 Q50 88 50 88 Q50 88 55 70 Z" fill="#fef08a"/>
+
+    <!-- Canh trai & phai -->
+    <path d="M35 55 L20 72 L35 70 Z" fill="url(#rocketAccent)"/>
+    <path d="M65 55 L80 72 L65 70 Z" fill="url(#rocketAccent)"/>
+
+    <!-- Than ten lua -->
+    <path d="M50 15 C36 30 35 60 38 72 L62 72 C65 60 64 30 50 15 Z" fill="url(#rocketBody)"/>
+
+    <!-- Mui ten lua -->
+    <path d="M50 15 C43 25 40 33 39 38 L61 38 C60 33 57 25 50 15 Z" fill="url(#rocketAccent)"/>
+
+    <!-- Canh giua -->
+    <path d="M48 55 L50 72 L52 55 Z" fill="#94a3b8"/>
+
+    <!-- Cua so phi thuyen -->
+    <circle cx="50" cy="46" r="8" fill="#64748b"/>
+    <circle cx="50" cy="46" r="6.5" fill="url(#glassGrad)"/>
+    <circle cx="48" cy="44" r="2" fill="#ffffff" opacity="0.8"/>
+  </g>
+</svg>
