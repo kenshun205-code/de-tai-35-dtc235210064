@@ -12,6 +12,11 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/ssl:/etc/nginx/ssl:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
     depends_on:
       - web-app
       - phpmyadmin
@@ -35,6 +40,11 @@ services:
       - DB_NAME=app_db
       - DB_USER=app_user
       - DB_PASSWORD=SecureAppPass_2026!#
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
     depends_on:
       - db
     networks:
@@ -53,6 +63,11 @@ services:
       MYSQL_PASSWORD: SecureAppPass_2026!#
     volumes:
       - db_data:/var/lib/mysql
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 1024M
     networks:
       - backend-net
 
@@ -68,6 +83,11 @@ services:
       UPLOAD_LIMIT: 64M
     expose:
       - "80"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
     depends_on:
       - db
     networks:
@@ -83,6 +103,11 @@ services:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     ports:
       - "9090:9090"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
     networks:
       - backend-net
 
@@ -96,6 +121,11 @@ services:
       - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '0.30'
+          memory: 256M
     networks:
       - backend-net
 
@@ -108,17 +138,64 @@ services:
       - "3001:3000"
     volumes:
       - grafana_data:/var/lib/grafana
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
     depends_on:
       - prometheus
+      - loki
     networks:
       - frontend-net
       - backend-net
 
-# Volume lưu trữ bền vững cho Database và Grafana
+  # 8. Dịch vụ Loki (Centralized Logging - Thu thập và lưu trữ log tập trung)
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    restart: unless-stopped
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki/local-config.yaml:/etc/loki/local-config.yaml:ro
+      - loki_data:/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    networks:
+      - backend-net
+
+  # 9. Dịch vụ Promtail (Thu thập log container từ Docker Socket gửi về Loki)
+  promtail:
+    image: grafana/promtail:latest
+    container_name: promtail
+    restart: unless-stopped
+    volumes:
+      - ./promtail/config.yml:/etc/promtail/config.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    command: -config.file=/etc/promtail/config.yml
+    deploy:
+      resources:
+        limits:
+          cpus: '0.30'
+          memory: 256M
+    depends_on:
+      - loki
+    networks:
+      - backend-net
+
+# Volume lưu trữ bền vững cho Database, Grafana và Loki
 volumes:
   db_data:
     driver: local
   grafana_data:
+    driver: local
+  loki_data:
     driver: local
 
 # 2 mạng tách biệt theo tiêu chí Network Isolation
@@ -128,5 +205,6 @@ networks:
   backend-net:
     driver: bridge
 
-#Tài khoản Root (Toàn quyền quản trị cao nhất):Tài khoản: root Mật khẩu: RootSecurePass_2026!#   
-#Tài khoản Ứng dụng (App user):Tài khoản: app_user   Mật khẩu: SecureAppPass_2026!#   
+# Tài khoản quản trị cơ sở dữ liệu:
+# - Root (Toàn quyền quản trị): root / RootSecurePass_2026!#
+# - Web App (Quyền ứng dụng): app_user / SecureAppPass_2026!#
