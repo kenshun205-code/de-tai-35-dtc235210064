@@ -74,9 +74,51 @@ services:
       - frontend-net
       - backend-net
 
-# Volume lưu trữ bền vững cho Database
+  # 5. Dịch vụ Prometheus (Thu thập và lưu trữ metrics, kết nối backend-net)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    networks:
+      - backend-net
+
+  # 6. Dịch vụ cAdvisor (Thu thập thông số container, kết nối backend-net)
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - backend-net
+
+  # 7. Dịch vụ Grafana (Hiển thị Dashboard trực quan hóa, mở port 3001:3000, volume bền vững grafana_data)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - frontend-net
+      - backend-net
+
+# Volume lưu trữ bền vững cho Database và Grafana
 volumes:
   db_data:
+    driver: local
+  grafana_data:
     driver: local
 
 # 2 mạng tách biệt theo tiêu chí Network Isolation
